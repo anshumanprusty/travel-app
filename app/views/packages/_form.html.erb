@@ -1,0 +1,38 @@
+<%= form_for @package, url: packages_path, html: { multipart: true }  do |f| %>
+  <% if @package.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@package.errors.count, "error") %> prohibited this package from being saved:</h2>
+
+      <ul>
+      <% @package.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :agency %><br>
+    <%= select_tag "agency_id", options_from_collection_for_select(@agency, "id", "name"), include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.text_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
