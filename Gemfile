@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 
 gem 'devise'
-gem 'thor', '0.19.1'
+
 gem 'rails_admin', '~> 1.0'
 
 gem "paperclip", "~> 5.0.0"
