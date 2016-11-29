@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
-  	@agencies = Agency.all 
+  	$a = 0
+  	@agencies = Agency.all
+    @packages = Package.all  	
   end
 end

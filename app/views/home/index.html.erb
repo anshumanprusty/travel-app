@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
 
-<table class="table table-striped" border="1">
+  <div id="sidemenu">
+    
+    <table class="table table" border="0">
   <tbody>
-  	<tr><th>Agency</th></tr>
+    <tr><th>Agency</th></tr>
     <% @agencies.each do |agency| %>
       <tr>
         <td><%= agency.name %></td>
@@ -12,19 +13,39 @@
   </tbody>
 </table>
 <br/><br/>
-<table class="table table-striped" border="1">
+<table class="table table" border="0">
   <tbody>
-  	<tr><th>Price Range</th></tr>  
+    <tr><th>Price Range</th></tr>  
 
   </tbody>
 </table>
 <br/><br/>
-<table class="table table-striped" border="1">
+<table class="table table" border="0">
   <tbody>
-  	<tr><th>Duration</th></tr>  
+    <tr><th>Duration</th></tr>  
 
   </tbody>
 </table>
+  </div>
 
-</div>
+
+<div id="content">
+
+    
+ <table class="table table-striped" border="1">
+  <tbody>
+      <tr>
+    <% @packages.each do |package| %>
+    <% $a = $a +1 %>
+        <td width="311" height="200"><%= image_tag package.image.url %><h2><%= package.name %></h2><p>Price: <%= package.price %></p><p>Duration: <%= package.duration %></p><p>Some description goes here for each package....</p></td>
+    <% if $a ==3 %></tr><tr><% end %>
+    <% end %>
+      </tr>
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-primary btn-lg btn-block">Load More....</button>
+  </div>
+
+
 
