@@ -4,26 +4,34 @@
     
     <table class="table table" border="0">
   <tbody>
-    <tr><th>Agency</th></tr>
+    <tr><th width="60%">Agency</th><th><%= link_to "Clear Filter", home_index_path() %></th></tr> 
     <% @agencies.each do |agency| %>
       <tr>
-        <td><%= agency.name %></td>
+        <td colspan=2><%= link_to agency.name, home_index_path(:agency_id=>agency.id) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<br/><br/>
+<hr>
 <table class="table table" border="0">
   <tbody>
     <tr><th>Price Range</th></tr>  
-
+    <% @prices.each do |pkgprice| %>
+      <tr>
+        <td><%= link_to pkgprice.price, home_index_path(:price=>pkgprice.price) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
-<br/><br/>
+<hr>
 <table class="table table" border="0">
   <tbody>
     <tr><th>Duration</th></tr>  
-
+    <% @durations.each do |pkgdurat| %>
+      <tr>
+        <td><%= link_to pkgdurat.duration, home_index_path(:duration=>pkgdurat.duration) %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
   </div>
@@ -32,12 +40,12 @@
 <div id="content">
 
     
- <table class="table table-striped" border="1">
+ <table class="table table-bordered" border="0">
   <tbody>
       <tr>
     <% @packages.each do |package| %>
     <% $a = $a +1 %>
-        <td width="311" height="200"><%= image_tag package.image.url %><h2><%= package.name %></h2><p>Price: <%= package.price %></p><p>Duration: <%= package.duration %></p><p>Some description goes here for each package....</p></td>
+        <td width="311" height="200"><center><%= image_tag package.image.url %></center><h2><%= package.name %></h2><p>Price: <%= package.price %></p><p>Duration: <%= package.duration %></p><p>Some description goes here for each package....</p></td>
     <% if $a ==3 %></tr><tr><% end %>
     <% end %>
       </tr>
