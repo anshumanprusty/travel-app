@@ -89,8 +89,10 @@
 <% if user_signed_in? %>     
  <% if current_user.role=="admin" %>
  <%= link_to "Admin Dashboard", rails_admin_path %>
- <% else current_user.role=="agent" %>
+ <% elsif current_user.role=="agent" %>
   <%= link_to "Agent Dashboard", packages_path(:agency_id=>Agency.find_by(user_id: current_user)) %>
+  <% else %><% current_user.role=="user" %>
+  <%= link_to "User Dashboard", root_path %>
  <% end %>
         <li>Logged in as <strong><%= current_user.email %></strong></li>
         <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li> |
