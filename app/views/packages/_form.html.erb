@@ -13,7 +13,12 @@
 
   <div class="field">
     <%= f.label :agency %><br>
-    <%= select_tag "agency_id", options_from_collection_for_select(@agency, "id", "name"), include_blank: true %>
+
+    <% if params[:agency_id].present? %>
+        <%= f.text_field :agency_id, :value =>params[:agency_id] %>
+    <% else %>
+<%= select_tag("agency_id", options_from_collection_for_select(Agency.all, "id", "name")) %>
+<% end %>
   </div>
   <div class="field">
     <%= f.label :name %><br>

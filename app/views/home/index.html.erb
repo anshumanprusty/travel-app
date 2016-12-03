@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= form_tag home_index_path do %>
+
   <div id="sidemenu">
     
     <table class="table table" border="0">
@@ -7,7 +9,9 @@
     <tr><th width="60%">Agency</th><th><%= link_to "Clear Filter", home_index_path() %></th></tr> 
     <% @agencies.each do |agency| %>
       <tr>
-        <td colspan=2><%= link_to agency.name, home_index_path(:agency_id=>agency.id) %></td>
+        <td colspan=2>
+<%= check_box_tag "agency_ids[]", agency.id, false, :onclick => "javascript: document.index.submit();" %><%=agency.name%>
+        <% link_to agency.name, home_index_path(:agency_id=>agency.id) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -51,6 +55,7 @@
       </tr>
   </tbody>
 </table>
+<% end %>
 
 <button type="button" class="btn btn-primary btn-lg btn-block">Load More....</button>
   </div>

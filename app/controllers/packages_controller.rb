@@ -4,7 +4,12 @@ class PackagesController < ApplicationController
   # GET /packages
   # GET /packages.json
   def index
-    @packages = Package.all
+    #binding.pry
+    if params[:agency_id].present?
+      @packages = Package.where(:agency_id=>params[:agency_id])
+    else
+      @packages = Package.all
+    end
   end
 
   # GET /packages/1
@@ -20,11 +25,13 @@ class PackagesController < ApplicationController
 
   # GET /packages/1/edit
   def edit
+
   end
 
   # POST /packages
   # POST /packages.json
   def create
+    #binding.pry
     @package = Package.new(package_params)
 
     respond_to do |format|
@@ -57,7 +64,7 @@ class PackagesController < ApplicationController
   def destroy
     @package.destroy
     respond_to do |format|
-      format.html { redirect_to packages_url, notice: 'Package was successfully destroyed.' }
+      format.html { redirect_to packages_url(:agency_id=>params[:agency_id]), notice: 'Package was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +77,6 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:name, :price, :image, :duration)
+      params.require(:package).permit(:name, :price, :image, :duration, :agency_id)
     end
 end
