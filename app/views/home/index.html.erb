@@ -1,4 +1,10 @@
-<%= form_tag home_index_path do %>
+<script type="text/javascript">
+  function f1(){
+    alert("Hello");
+    document.myform.submit(this.form);
+  }
+</script>
+<%= form_tag(home_index_path, :name=>'myform')  do %>
   <div id="sidemenu">
     
     <table class="table table" border="0">
@@ -7,8 +13,8 @@
     <% @agencies.each do |agency| %>
       <tr>
         <td colspan=2>
-<%= check_box_tag "agency_ids[]", agency.id, false, :onclick => "javascript: document.index.submit();" %><%=agency.name%>
-        <% link_to agency.name, home_index_path(:agency_id=>agency.id) %></td>
+<%= check_box_tag "agency_ids[]", agency.id, @selected_agencies.include?(agency.id.to_s), :onclick => "javascript: f1();" %><%=agency.name %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -17,9 +23,12 @@
 <table class="table table" border="0">
   <tbody>
     <tr><th>Price Range</th></tr>  
-    <% @prices.each do |pkgprice| %>
+    <% @prices.each do |price| %>
       <tr>
-        <td><%= link_to pkgprice.price, home_index_path(:price=>pkgprice.price) %></td>
+        <td>
+<%= check_box_tag "price_ids[]", price.price, @selected_prices.include?(price.price.to_s), :onclick => "javascript: f1();" %><%=price.price %>
+
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -28,9 +37,10 @@
 <table class="table table" border="0">
   <tbody>
     <tr><th>Duration</th></tr>  
-    <% @durations.each do |pkgdurat| %>
+    <% @durations.each do |duration| %>
       <tr>
-        <td><%= link_to pkgdurat.duration, home_index_path(:duration=>pkgdurat.duration) %></td>
+        <td>
+        <%= check_box_tag "duration_ids[]", duration.duration, @selected_durations.include?(duration.duration.to_s), :onclick => "javascript: f1();" %><%=duration.duration %></td>
       </tr>
     <% end %>
   </tbody>
