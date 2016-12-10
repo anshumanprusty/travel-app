@@ -59,3 +59,5 @@ end
 
 gem 'pry'
 
+gem 'will_paginate-bootstrap'
+

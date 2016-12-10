@@ -1,6 +1,12 @@
 class HomeController < ApplicationController
   def index
-  	$a = 0
+  	@a = 0
+
+    #@packages = Package.paginate(page: params[:page], per_page: 2).order('created_at DESC')
+
+    #@packages = Package.paginate(:page => params[:page], :per_page => 3)
+
+
 
   	@agencies = Agency.all
 
@@ -26,6 +32,7 @@ class HomeController < ApplicationController
     @selected_durations = (params[:duration_ids].present? ? params[:duration_ids] : [])
 
     @packages = Package.all 
+
 
     if params[:agency_ids]
       @packages = Package.where("agency_id IN (?)", params[:agency_ids])
@@ -55,5 +62,9 @@ class HomeController < ApplicationController
       @packages = Package.where("agency_id IN (?) AND price IN (?) AND duration IN (?)", params[:agency_ids], params[:price_ids] ,params[:duration_ids])                     
     end
 #binding.pry
+
+    @packages = @packages.paginate(:page => params[:page], :per_page => 3)
+
+
   end
 end
